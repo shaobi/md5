@@ -92,7 +92,7 @@
             <div class="form-group row mt-3">
               <label for="input" class="col-sm-2 col-form-label">Nazwa Towaru</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputNazwaTowaru" placeholder="Nazwa Towaru" oninput="checkNazwaTowaru('inputNazwaTowaru','inputNazwaTowaruError')" >
+                <input type="text" class="form-control" id="inputNazwaTowaru" placeholder="Nazwa Towaru" oninput="checkNazwaTowaru()" >
                 <div id="inputNazwaTowaruError"></div>
               </div>
             </div>
@@ -100,7 +100,7 @@
             <div class="form-group row">
               <label for="input" class="col-sm-2 col-form-label">Kod Towaru</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputKodTowaru" placeholder="Kod Towaru" oninput="checkKodTowaru('inputKodTowaru','inputKodTowaruError')" >
+                <input type="text" class="form-control" id="inputKodTowaru" placeholder="Kod Towaru" oninput="checkKodTowaru()" >
                 <div id="inputKodTowaruError"></div>
               </div>
             </div>
@@ -108,7 +108,7 @@
             <div class="form-group row">
               <label for="input" class="col-sm-2 col-form-label">Cena netto</label>
               <div class="col-sm-10">
-                <input type="numer" class="form-control" id="inputCenaNetto" placeholder="Cena netto" onchange="cenaNettoZera('inputCenaNetto','inputCenaNettoError')" oninput="checkCenaNetto('inputCenaNetto','inputCenaNettoError')">
+                <input type="numer" class="form-control" id="inputCenaNetto" placeholder="Cena netto" onchange="cenaNettoZera()" oninput="checkCenaNetto()">
                 <div id="inputCenaNettoError"></div>
               </div>
             </div>
@@ -116,7 +116,7 @@
             <div class="form-group row">
               <label for="input" class="col-sm-2 col-form-label">Stawka VAT</label>
               <div class="col-sm-10">
-                <input type="numer" class="form-control" id="inputStawkaVAT" placeholder="Stawka VAT" oninput="checkStawkaVAT('inputStawkaVAT','inputStawkaVATError')">
+                <input type="numer" class="form-control" id="inputStawkaVAT" placeholder="Stawka VAT" oninput="checkStawkaVAT()">
                 <div id="inputStawkaVATError"></div>
               </div>
             </div>
@@ -131,11 +131,11 @@
             <div class="form-group row">
               <label for="selectKategoriaTowarowa" class="col-sm-2 col-form-label" >Kategoria towarowa</label>
               <div class="col-sm-10">
-                <select id="selectKategoriaTowarowa" class="form-control" oninput="checkKategoriaTowarowa('selectKategoriaTowarowa','selectKategoriaTowarowaError')">
+                <select id="selectKategoriaTowarowa" class="form-control" oninput="checkKategoriaTowarowa()">
                   <option value="0" >-- wybierz --</option>
-                  <option value="1">kategoria 1</option>
-                  <option value="2">kategoria 2</option>
-                  <option value="3">kategoria 3</option>
+                  <option value="1">damskie</option>
+                  <option value="2">męskie</option>
+                  <option value="3">dziecięce</option>
                 </select>
                 <div id="selectKategoriaTowarowaError"></div>
               </div>
@@ -143,26 +143,26 @@
 
             <div class="form-group row ">
               <div class="col-sm-2">Opcje towaru</div>
-              <div class="col-sm-10" id="checkboxListOpcjeTowaru" oninput="checkOpcjeTowaru('checkboxListOpcjeTowaru','checkboxListOpcjeTowaruError')">
+              <div class="col-sm-10" id="checkboxListOpcjeTowaru" oninput="checkOpcjeTowaru()">
                 <div class="form-check custom-control-inline" >
-                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru" id="gridCheck1">
-                  <label class="form-check-label" for="gridCheck1">1</label>
+                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru" id="gridCheck1" value="1">
+                  <label class="form-check-label" for="gridCheck1">XS</label>
                 </div>
                 <div class="form-check custom-control-inline">
-                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru" id="gridCheck2">
-                  <label class="form-check-label" for="gridCheck2">2</label>
+                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru" id="gridCheck2" value="2">
+                  <label class="form-check-label" for="gridCheck2">S</label>
                 </div>
                 <div class="form-check custom-control-inline">
-                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru"  id="gridCheck3">
-                  <label class="form-check-label" for="gridCheck3">3</label>
+                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru"  id="gridCheck3" value="3">
+                  <label class="form-check-label" for="gridCheck3">M</label>
                 </div>
                 <div class="form-check custom-control-inline">
-                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru" id="gridCheck4">
-                  <label class="form-check-label" for="gridCheck4">4</label>
+                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru" id="gridCheck4" value="4">
+                  <label class="form-check-label" for="gridCheck4">L</label>
                 </div>
                 <div class="form-check custom-control-inline">
-                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru" id="gridCheck5">
-                  <label class="form-check-label" for="gridCheck5">5</label>
+                  <input class="form-check-input" type="checkbox" name="cbOpcjeTowaru" id="gridCheck5" value="5">
+                  <label class="form-check-label" for="gridCheck5">XL</label>
                 </div>
                 <div style="display:block" id="checkboxListOpcjeTowaruError"></div>
               </div>
@@ -173,24 +173,24 @@
                 <legend class="col-form-label col-sm-2 pt-0">Ocena towaru</legend>
                 <div class="col-sm-10">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                    <label class="form-check-label" for="gridRadios1">1</label>
+                    <input class="form-check-input" type="radio" name="rbOcenaTowaru" id="rbOcenaTowaru1" value="1">
+                    <label class="form-check-label" for="rbOcenaTowaru1">zła</label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">2</label>
+                    <input class="form-check-input" type="radio" name="rbOcenaTowaru" id="rbOcenaTowaru2" value="2">
+                    <label class="form-check-label" for="rbOcenaTowaru2">srednia</label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" checked> 
-                    <label class="form-check-label" for="gridRadios3">3</label>
+                    <input class="form-check-input" type="radio" name="rbOcenaTowaru" id="rbOcenaTowaru3" value="3" checked> 
+                    <label class="form-check-label" for="rbOcenaTowaru3">dobra</label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4">
-                    <label class="form-check-label" for="gridRadios4">4</label>
+                    <input class="form-check-input" type="radio" name="rbOcenaTowaru" id="rbOcenaTowaru4" value="4">
+                    <label class="form-check-label" for="rbOcenaTowaru4">bardzo dobra</label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="option5">
-                    <label class="form-check-label" for="gridRadios5">5</label>
+                    <input class="form-check-input" type="radio" name="rbOcenaTowaru" id="rbOcenaTowaru5" value="5">
+                    <label class="form-check-label" for="rbOcenaTowaru5">rewelacyjna</label>
                   </div>
                 </div>
               </div>
@@ -206,7 +206,15 @@
             <div class="form-group">
               <div class="col">
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary " onclick="czyWszystkoOK()" >Dodaj zamówienie</button>
+                  <button type="button" id="buttonDodajZamowienie" class="btn btn-primary " onclick="czyWszystkoOK()" >Dodaj zamówienie</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col">
+                <div class="text-center">
+                  <button type="button" id="buttonAktualizujWiersz" class="update btn btn-primary" style="display: none" onclick="aktualizujWiersz()">Aktualizuj wiersz</button>
                 </div>
               </div>
             </div>
@@ -214,46 +222,87 @@
           </form>
           <!-- Koniec FORMULARZ -->
 
+          <div class="form-group row">
+              <label for="selectSortowanieTabeli" class="col-sm-2 col-form-label" >Sortowanie tabeli </label>
+              <div class="col-sm-3">
+                <select id="selectSortowanieTabeli" class="form-control" onchange="sortowanieTabeli()">
+                  <option value="0" >-- wybierz --</option>
+                  <option value="1">cena od najniższej</option>
+                  <option value="2">cena od najwyższej</option>
+                  <option value="3">ocena od najniższej</option>
+                  <option value="4">ocena od najwyższej</option>
+                  <option value="5">nazwa od A</option>
+                  <option value="6">nazwa od Z</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="alert alert-success" id="myAlert" role="alert" style="display:none;" >Wiersz został usunięty.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
           <!-- TABELA TABLESSORTER-->
           <div>
             <table id="myTable" class="tablesorter">
               <thead>
                 <tr>
-                  <th>Last Name</th>
-                  <th>First Name</th>
-                  <th>Email</th>
-                  <th>Due</th>
-                  <th>Web Site</th>
+                  <th hidden id="IdTowaru">IdTowaru</th>
+                  <th>Nazwa towaru</th>
+                  <th class="sorter-false">Kod</th>
+                  <th class="sorter-false">Cena netto</th>
+                  <th class="sorter-false">Stawka VAT</th>
+                  <th>Cena brutto</th>
+                  <th class="sorter-false">Kategoria towarowa</th>
+                  <th class="sorter-false">Opcje</th>
+                  <th>Ocena</th> 
+                  <th class="sorter-false">Zdjecie</th>
+                  <th class="sorter-false">Edytuj</th>
+                  <th class="sorter-false">Usuń</th>
+                  <th class="sorter-false">Do koszyka</th>
+                  <th>kategoria</th>
+                  <th>opcje</th>
+                  <th>ocena</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Smith</td>
-                  <td>John</td>
-                  <td>jsmith@gmail.com</td>
-                  <td>$50.00</td>
-                  <td>http://www.jsmith.com</td>
+                <!-- Tu dodają się nowe wiersze z funkcji addRowToTable() -->
+                 <tr>
+                  <td hidden>0</td>
+                  <td>ABC</td>
+                  <td>AX-01</td>
+                  <td>1.01</td>
+                  <td>23</td>
+                  <td>1.01</td>
+                  <td>damskie</td>
+                  <td>XS S</td>
+                  <td>rewelacyjna</td>
+                  <td>zdjecie 1</td>
+                  <td><button type="button" class="edit btn btn-outline-info btn-sm btn-block" onclick="edytujWiersz()">edit</button></td>
+                  <td><button type="button" class="remove btn btn-outline-danger btn-sm btn-block" onclick="usunWiersz()">-</button></td>
+                  <td><button type="button" class="btn btn-outline-warning btn-sm btn-block">+</button></td>
+                  <td>1</td>
+                  <td>1 2</td>
+                  <td>5</td>
                 </tr>
                 <tr>
-                  <td>Bach</td>
-                  <td>Frank</td>
-                  <td>fbach@yahoo.com</td>
-                  <td>$50.00</td>
-                  <td>http://www.frank.com</td>
-                </tr>
-                <tr>
-                  <td>Doe</td>
-                  <td>Jason</td>
-                  <td>jdoe@hotmail.com</td>
-                  <td>$100.00</td>
-                  <td>http://www.jdoe.com</td>
-                </tr>
-                <tr>
-                  <td>Conway</td>
-                  <td>Tim</td>
-                  <td>tconway@earthlink.net</td>
-                  <td>$50.00</td>
-                  <td>http://www.timconway.com</td>
+                  <td hidden>1</td>
+                  <td>ZXY</td>
+                  <td>YX-09</td>
+                  <td>99.99</td>
+                  <td>22</td>
+                  <td>99.00</td>
+                  <td>męskie</td>
+                  <td>L XL</td>
+                  <td>zła</td>
+                  <td>zdjecie 9</td>
+                  <td><button type="button" class="edit btn btn-outline-info btn-sm btn-block" onclick="edytujWiersz()">edit</button></td>
+                  <td><button type="button" class="remove btn btn-outline-danger btn-sm btn-block" onclick="usunWiersz()">-</button></td>
+                  <td><button type="button" class="btn btn-outline-warning btn-sm btn-block">+</button></td>
+                  <td>2</td>
+                  <td>4 5</td>
+                  <td>1</td>
                 </tr>
               </tbody>
             </table>
@@ -288,68 +337,68 @@
 <!-- FOOTER -->
 <footer class="footer mt-auto py-3">
   <div class="container">
-    <span class="text-muted">Stopka strony głównej: Olga Biernacka | numer indeksu 39988</span>
+    <span class="text-muted">Stopka strony głównej</span>
   </div>
 </footer>
 <!-- END FOOTER -->
 
-            <!-- Modal KOSZYK -->
-            <div class="modal fade" id="myModalKoszyk" tabindex="-1" role="dialog" aria-labelledby="myModalKoszykLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="myModalKoszykLabel">Mój koszyk</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
+<!-- Modal KOSZYK -->
+<div class="modal fade" id="myModalKoszyk" tabindex="-1" role="dialog" aria-labelledby="myModalKoszykLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalKoszykLabel">Mój koszyk</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
 
-                      <div class="container-fluid">
-                        <div class="row">
-                          <div class="col-md-4">Nazwa</div>
-                          <div class="col-md-4">Cena</div>
-                          <div class="col-md-4">Ilość sztuk</div>
-                        </div>
-                      </div>  
-                      <hr>
-
-                      <div class="form-group row">
-                        <label for="selectOpcjeDostawy" class="col-form-label ml-4" >Opcje dostawy</label>
-                        <div class="col-sm-5">
-                          <select id="selectOpcjeDostawy" class="form-control form-control-sm" required>
-                            <option value="" >-- wybierz --</option>
-                            <option value="1">opcja 1</option>
-                            <option value="2">opcja 2</option>
-                            <option value="3">opcja 3</option>
-                          </select>
-                        </div>
-                        <div class="invalid-feedback">Wybierz jedną z pozycji na liście.</div>
-                      </div>
-
-                      <hr>
-                      <div class="row">
-                        <label for="input" class="col-form-label ml-4">Cena całkowita</label>
-                        <div class="col-sm-5">
-                          <input type="text" class="form-control form-control-sm" id="inputCenaBrutto" readonly>
-                        </div>
-                      </div>
-
-                  </div>
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                    <button type="button" class="btn btn-primary">Kup</button>
-                  </div>
-
-                </div>
-              </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-4">Nazwa</div>
+              <div class="col-md-4">Cena</div>
+              <div class="col-md-4">Ilość sztuk</div>
             </div>
-            <!-- END Modal KOSZYK -->
+          </div>  
+          <hr>
+
+          <div class="form-group row">
+            <label for="selectOpcjeDostawy" class="col-form-label ml-4" >Opcje dostawy</label>
+            <div class="col-sm-5">
+              <select id="selectOpcjeDostawy" class="form-control form-control-sm" required>
+                <option value="" >-- wybierz --</option>
+                <option value="1">opcja 1</option>
+                <option value="2">opcja 2</option>
+                <option value="3">opcja 3</option>
+              </select>
+            </div>
+            <div class="invalid-feedback">Wybierz jedną z pozycji na liście.</div>
+          </div>
+
+          <hr>
+          <div class="row">
+            <label for="input" class="col-form-label ml-4">Cena całkowita</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control form-control-sm" id="inputCenaBrutto" readonly>
+            </div>
+          </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+        <button type="button" class="btn btn-primary">Kup</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- END Modal KOSZYK -->
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
   </body>
 </html>
