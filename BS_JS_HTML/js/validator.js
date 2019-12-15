@@ -1,29 +1,3 @@
-/* SAMPLE
-function nameValidator(pole, poleError) {
-	// console.log("coś");
-
-	var pole = document.getElementById(pole);
-	var poleError = document.getElementById(poleError);
-	// nazwa towaru: maxlength="10" pattern="[A-Za-z]{10}" 
-
-	// console.log(pole.value);
-
-	if(pole.value.length < 2) {
-		poleError.innerHTML = "za krótkie";
-		pole.classList.add("is-invalid");
-		poleError.classList.add("invalid-feedback");
-	}
-	else {
-		poleError.innerHTML = "ok";
-		
-		pole.classList.remove("is-invalid");
-		pole.classList.add("is-valid");
-		poleError.classList.remove("invalid-feedback");
-		poleError.classList.add("valid-feedback");
-	}
-} 
-END SAMPLE */
-
 var wszystkoOK = false;
 // sprawdzane przy naciśnięciu przycisku wyślij
 // jeżeli false to nie wysyłaj danych
@@ -179,14 +153,6 @@ function checkOpcjeTowaru() {
 }
 
 function czyWszystkoOK(){
-
-	// if ( checkNazwaTowaru() && checkKodTowaru() && checkCenaNetto() 
-	// 	&& checkStawkaVAT() && checkKategoriaTowarowa() && checkOpcjeTowaru() )
-	// {
-	// 	console.log("UUUU :) ");
-	// }
-	// else
-	// 	console.log("NO :( ");
 	
 	checkKodTowaru();
 	checkCenaNetto();
@@ -195,12 +161,39 @@ function czyWszystkoOK(){
 	checkOpcjeTowaru();
 	checkNazwaTowaru();
 	
-	console.log("Wszystko ok: " + wszystkoOK) ;
+	//console.log("Wszystko ok: " + wszystkoOK) ;
 	if(!wszystkoOK) {
 		alert("Uzupełnij puste lub źle wypełnione pola!");
 	}
 	else {
 		addRowToTable();
+	}
+}
+
+function sortowanieTabeli(){
+
+	var wybor = document.getElementById("selectSortowanieTabeli").value;
+	
+	// ASC 0 - rosnąco, DESC 1 - malejąco 
+	switch (wybor) {
+		case '1': // cena brutto od najniższej
+			$('#myTable').trigger("sorton", [ [[5,0]] ]);
+			break;
+		case '2': // cena brutto od najwyższej 
+			$('#myTable').trigger("sorton", [ [[5,1]] ]);
+			break;	
+		case '3': // ocena od najniższej 
+			$('#myTable').trigger("sorton", [ [[15,0]] ]);
+			break; 
+		case '4': // ocena od najwyższej
+			$('#myTable').trigger("sorton", [ [[15,1]] ]);
+			break;				
+		case '5': // nazwa od A
+			$('#myTable').trigger("sorton", [ [[1,0]] ]);
+			break;
+		case '6': // nazwa od Z
+			$('#myTable').trigger("sorton", [ [[1,1]] ]);
+			break;	
 	}
 }
 
@@ -253,9 +246,9 @@ function addRowToTable() {
 			+ '</td><td>' + '<button type="button" class="btn btn-outline-info btn-sm btn-block" onclick="edytujWiersz()">edit</button>'
 			+ '</td><td>' + '<button type="button" class="remove btn btn-outline-danger btn-sm btn-block" onclick="usunWiersz()">-</button>'
 			+ '</td><td>' + '<button type="button" class="btn btn-outline-warning btn-sm btn-block" onclick="dodajWiersz()">+</button>'
-			+ '</td><td>' + kategoriaID 
-			+ '</td><td>' + opcjeID 
-			+ '</td><td>' + ocenaID 
+			+ '</td><td hidden>' + kategoriaID 
+			+ '</td><td hidden>' + opcjeID 
+			+ '</td><td hidden>' + ocenaID 
 			+ '</td></tr>'
       , $row = $(row),
       resort = true;
@@ -263,6 +256,9 @@ function addRowToTable() {
       .find('tbody').append($row)
       .trigger('addRows', [$row, resort]);
       //alert("Nowy Towar został dodany :) ");
+
+    document.getElementById("myForm").reset();
+
 }
 
 function usunWiersz(){
@@ -327,7 +323,7 @@ function edytujWiersz(){
     }
  }
 
-function aktualizujWiersz(){
+ function aktualizujWiersz(){
 
 	var table = document.getElementById('myTable');
 	
@@ -336,59 +332,116 @@ function aktualizujWiersz(){
 	//czyWszystkoOK();
 	if ( wszystkoOK ) {
 		
-		//table.deleteRow(IdTowaru);
-		
-		table.closest('tr:'+[IdTowaru]).remove();
+		// usuwa wiersz o wybranym ID
+		// +1 zeby nie usuwał wiersza th (nagłówki kolumn)
+		table.deleteRow(parseInt(IdTowaru) + 1);
 
-
-		// usuwa wierzsz o wybranym ID
-
-
-
-    	
     	// dodaje nowy wiersz
-    	//addRowToTable();
+    	setTimeout(function() {
+        	addRowToTable();
+    	}, 1000);
+     	
 
-		//$('#buttonAktualizujWiersz').hide();
-    	//$('#buttonDodajZamowienie').show();
+		$('#buttonAktualizujWiersz').hide();
+  		$('#buttonDodajZamowienie').show();
 	}
 	else {
 		alert("Uzupełnij puste lub źle wypełnione pola!");
 	}
-
-
-
-
 }
 
+ function dodajDoKoszyka(){
 
+ 	var table = document.getElementById('myTable');
+	var cells = table.getElementsByTagName('td');
 
-function sortowanieTabeli(){
+	for (var i = 0; i < cells.length; i++) {
+        
+        var cell = cells[i]; // Take each cell
+        cell.onclick = function() { // do something on onclick event for cell
+            
+            var rowId = this.parentNode.rowIndex; // zwraca id wiersza
+            var rowSelected = table.getElementsByTagName('tr')[rowId]; // zwraca cały wiersz         
+            //console.log(rowSelected);
+        	
+        	// dodanie do localStorage: nazwy i cenu brutto towaru
+        	localStorage.setItem('nazwaTowaru', rowSelected.cells[1].innerHTML);
+        	localStorage.setItem('cenaBruttoTowaru', rowSelected.cells[5].innerHTML);
+        	//localStorage.setItem('liczbaSztuk',1);
 
-	var wybor = document.getElementById("selectSortowanieTabeli").value;
-	
-	// ASC - rosnąco, DESC - malejąco
-	switch (wybor) {
-		case '1': // cena od najniższej ASC
-			$('#myTable').trigger("sorton", [ [[4,0]] ]);
-			break;
-		case '2': // cena od najwyższej DESC
-			$('#myTable').trigger("sorton", [ [[4,1]] ]);
-			break;	
-		case '3': // ocena od najniższej 
-			$('#myTable').trigger("sorton", [ [[7,9]] ]);
-			break; // ocena od najwyższej
-		case '4':
-			$('#myTable').trigger("sorton", [ [[7,1]] ]);
-			break;				
-		case '5': // nazwa od A
-			$('#myTable').trigger("sorton", [ [[0,0]] ]);
-			break;
-		case '6': // nazwa od Z
-			$('#myTable').trigger("sorton", [ [[0,1]] ]);
-			break;	
+        	$('#myAlertKoszyk').show();
+				setTimeout(function() {
+        		$("#myAlertKoszyk").hide(); // ukrywa element na stronie
+    			}, 1000);
+        }
+    }
+    uzupelnijKoszyk();
+ }
+
+function uzupelnijKoszyk() {
+
+	//var ilosc = '<select class="form-control form-control-sm" id="ilosc" onchange="koszykOblicz()"><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
+	var ilosc = '<input type="number" min="0" class="input-sm col-5" onchange="koszykOblicz()" placeholder=1 value=1>';
+
+	// sprawdzic czy localStorage != null wtedy dodajemy
+	if (localStorage.getItem('nazwaTowaru') !== null && localStorage.getItem('cenaBruttoTowaru') !== null) {
+
+		var row = '<tr><td>'  + localStorage.getItem('nazwaTowaru')
+				+ '</td><td>' + localStorage.getItem('cenaBruttoTowaru') 
+				+ '</td><td>' + ilosc 
+				+ '</td></tr>'
+	      , $row = $(row),
+	      resort = true;
+	    $('#myTableKoszyk')
+	      .find('tbody').append($row)
+	      .trigger('addRows', [$row, resort]);
+
+	    koszykOblicz();
 	}
 }
+
+function koszykOblicz(){
+
+	var cena, cena_wiersz = 0;
+
+	var cenaCalkowita = document.getElementById('inputCenaKoszyk');
+	var opcjaDostawy = parseFloat(document.getElementById('selectOpcjeDostawy').value);	
+
+	var table = document.getElementById('myTableKoszyk');
+	var cells = table.getElementsByTagName('td');
+	var rows  = table.getElementsByTagName('tr');
+	
+	// cena 1 elementu: pierwszy wiersz i druga kolumna
+	//var cena_brutto = rows[1].cells[1].innerHTML; 
+	//console.log("brutto: "+ cena_brutto);
+
+	// ilość 1 elementu: pierwszy wiersz i druga kolumna
+	//var ilosc = rows[1].cells[2].querySelector('input').value;
+	//console.log("ilosc: "+ ilosc);
+
+	for (var i=1; i<rows.length; i++) {
+		cena_wiersz += rows[i].cells[1].innerHTML * rows[i].cells[2].querySelector('input').value;
+	}
+
+	cena = cena_wiersz + opcjaDostawy;
+	cenaCalkowita.value = cena.toFixed(2);
+}
+
+function koszykKup(){
+	
+	localStorage.clear(); // info z https://kursjs.pl/kurs/storage/storage.php
+	$.tablesorter.clearTableBody( $('#myTableKoszyk') ); // usuwa zawartość tabeli bez nagłówków kolumn
+	$('#myModalKoszyk').modal('hide');
+	$('#myToastr').toast('show');
+}
+
+
+
+
+
+
+
+
 
 
 

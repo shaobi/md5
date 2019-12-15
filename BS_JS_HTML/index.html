@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    
+
     <script src="js/validator.js"></script>
     <!-- https://mottie.github.io/tablesorter/docs/ -->
 
@@ -27,6 +27,7 @@
     <script>
       $(function() {
         $("#myTable").tablesorter();
+        $("#myTableKoszyk").tablesorter();
       });
     </script>
   
@@ -88,7 +89,7 @@
            -->
 
           <!-- Formularz -->
-          <form>
+          <form id="myForm">
             <div class="form-group row mt-3">
               <label for="input" class="col-sm-2 col-form-label">Nazwa Towaru</label>
               <div class="col-sm-10">
@@ -243,6 +244,12 @@
             </button>
             </div>
 
+            <div class="alert alert-warning" id="myAlertKoszyk" role="alert" style="display:none;" >Dane zostały dodane do koszyka.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
           <!-- TABELA TABLESSORTER-->
           <div>
             <table id="myTable" class="tablesorter">
@@ -261,9 +268,9 @@
                   <th class="sorter-false">Edytuj</th>
                   <th class="sorter-false">Usuń</th>
                   <th class="sorter-false">Do koszyka</th>
-                  <th>kategoria</th>
-                  <th>opcje</th>
-                  <th>ocena</th>
+                  <th hidden>kategoria</th>
+                  <th hidden>opcje</th>
+                  <th hidden>ocena</th>
                 </tr>
               </thead>
               <tbody>
@@ -272,19 +279,19 @@
                   <td hidden>0</td>
                   <td>ABC</td>
                   <td>AX-01</td>
-                  <td>1.01</td>
+                  <td>0.99</td>
                   <td>23</td>
-                  <td>1.01</td>
+                  <td>1.00</td>
                   <td>damskie</td>
                   <td>XS S</td>
                   <td>rewelacyjna</td>
                   <td>zdjecie 1</td>
                   <td><button type="button" class="edit btn btn-outline-info btn-sm btn-block" onclick="edytujWiersz()">edit</button></td>
                   <td><button type="button" class="remove btn btn-outline-danger btn-sm btn-block" onclick="usunWiersz()">-</button></td>
-                  <td><button type="button" class="btn btn-outline-warning btn-sm btn-block">+</button></td>
-                  <td>1</td>
-                  <td>1 2</td>
-                  <td>5</td>
+                  <td><button type="button" class=" koszyk btn btn-outline-warning btn-sm btn-block" onclick="dodajDoKoszyka()">+</button></td>
+                  <td hidden>1</td>
+                  <td hidden>1 2</td>
+                  <td hidden>5</td>
                 </tr>
                 <tr>
                   <td hidden>1</td>
@@ -299,10 +306,10 @@
                   <td>zdjecie 9</td>
                   <td><button type="button" class="edit btn btn-outline-info btn-sm btn-block" onclick="edytujWiersz()">edit</button></td>
                   <td><button type="button" class="remove btn btn-outline-danger btn-sm btn-block" onclick="usunWiersz()">-</button></td>
-                  <td><button type="button" class="btn btn-outline-warning btn-sm btn-block">+</button></td>
-                  <td>2</td>
-                  <td>4 5</td>
-                  <td>1</td>
+                  <td><button type="button" class=" koszyk btn btn-outline-warning btn-sm btn-block" onclick="dodajDoKoszyka()">+</button></td>
+                  <td hidden>2</td>
+                  <td hidden>4 5</td>
+                  <td hidden>1</td>
                 </tr>
               </tbody>
             </table>
@@ -356,31 +363,58 @@
 
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-4">Nazwa</div>
-              <div class="col-md-4">Cena</div>
-              <div class="col-md-4">Ilość sztuk</div>
+              <table id="myTableKoszyk" class="tablesorter">
+                <thead>
+                  <tr>
+                    <th>Nazwa towaru</th>
+                    <th>Cena brutto</th>
+                    <th>Ilość</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Tu dodają się nowe wiersze z funkcji uzupelnijKoszyk() -->
+                </tbody>
+              </table>
             </div>
           </div>  
-          <hr>
 
           <div class="form-group row">
             <label for="selectOpcjeDostawy" class="col-form-label ml-4" >Opcje dostawy</label>
             <div class="col-sm-5">
-              <select id="selectOpcjeDostawy" class="form-control form-control-sm" required>
-                <option value="" >-- wybierz --</option>
-                <option value="1">opcja 1</option>
-                <option value="2">opcja 2</option>
-                <option value="3">opcja 3</option>
+              <select id="selectOpcjeDostawy" class="form-control form-control-sm" onchange="koszykOblicz()">
+                <option value="9.90" selected>poczta - 9.90</option>
+                <option value="19.99">kurier - 19.99</option>
+                <option value="0.00">odbiór osobisty - 0.00</option>
               </select>
             </div>
-            <div class="invalid-feedback">Wybierz jedną z pozycji na liście.</div>
           </div>
+
+<!--           <fieldset class="form-group">
+              <div class="row ml-1">
+                <legend class="col-form-label col-sm-2">Opcje dostawy</legend>
+                <div class="col-sm-8">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rbDostawa" id="rbDostawa1" value="9.90" checked>
+                    <label class="form-check-label" for="rbDostawa1">poczta - 9.90</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rbDostawa" id="rbDostawa2" value="19.99">
+                    <label class="form-check-label" for="rbDostawa2">kurier - 19.99</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rbDostawa" id="rbDostawa3" value="0"> 
+                    <label class="form-check-label" for="rbDostawa3">odbiór osobisty - 0.00</label>
+                  </div>
+                </div>
+              </div>
+            </fieldset> -->
+
 
           <hr>
           <div class="row">
             <label for="input" class="col-form-label ml-4">Cena całkowita</label>
             <div class="col-sm-5">
-              <input type="text" class="form-control form-control-sm" id="inputCenaBrutto" readonly>
+              <input type="number" class="form-control form-control-sm" id="inputCenaKoszyk" value="0" readonly>
             </div>
           </div>
 
@@ -388,13 +422,26 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-        <button type="button" class="btn btn-primary">Kup</button>
+        <button type="button" class="btn btn-primary" onclick="koszykKup()">Kup</button>
       </div>
 
     </div>
   </div>
 </div>
 <!-- END Modal KOSZYK -->
+
+<div class="toast" role="alert" id="myToastr" aria-live="assertive" aria-atomic="true" data-delay="2500" style="position: absolute; top:40vh; left:70vh; background-color: #d4edda;">
+  <div class="toast-header">
+    <strong class="mr-auto">Koszyk</strong>
+    <small>1 sec ago</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Zakup został pomyślnie zrealizowany :)
+ </div>
+</div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
