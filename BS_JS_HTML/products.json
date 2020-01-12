@@ -1,0 +1,48 @@
+[
+        {
+            "IdTowaru" 		: "001",
+            "nazwaTowaru" 	: "skarpetka",
+            "kodTowaru" 	: "SK-01",
+            "cenaNetto"		: "2.99",
+            "stawkaVAT"		: "12",
+            "cenaBrutto"	: "3.35",
+           	"zdjecie"		: "img/skarpetka.jpg",
+           	"kategoriaTowarowa_txt" : "dzieciece",
+           	"opcjeTowaru_txt" : "XS S",
+           	"ocenaTowaru_txt": "zła",
+           	"kategoriaID"	: "3",
+           	"opcjeID"		: "1,2",
+           	"ocenaID"		: "1"           	
+        },
+        {
+            "IdTowaru" 		: "002",
+            "nazwaTowaru" 	: "czapka",
+            "kodTowaru" 	: "CZ-02",
+            "cenaNetto"		: "10.99",
+            "stawkaVAT"		: "17",
+            "cenaBrutto"	: "12.85",
+           	"zdjecie"		: "img/czapka.jpg",
+           	"kategoriaTowarowa_txt" : "męskie",
+           	"opcjeTowaru_txt" : "M",
+           	"ocenaTowaru_txt": "średnia",
+           	"kategoriaID"	: "2",
+           	"opcjeID"		: "3",
+           	"ocenaID"		: "2"           	
+        },
+        {
+            "IdTowaru" 		: "003",
+            "nazwaTowaru" 	: "rekawiczki",
+            "kodTowaru" 	: "RE-03",
+            "cenaNetto"		: "7.99",
+            "stawkaVAT"		: "12",
+            "cenaBrutto"	: "8.95",
+           	"zdjecie"		: "img/rekawiczki.png",
+           	"kategoriaTowarowa_txt" : "męskie" ,
+           	"opcjeTowaru_txt" : "L XL",
+           	"ocenaTowaru_txt": "dobra",
+           	"kategoriaID"	: "2",
+           	"opcjeID"		: "4,5",
+           	"ocenaID"		: "3"           	
+        }
+    ]
+

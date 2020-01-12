@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <script src="js/validator.js"></script>
     <!-- https://mottie.github.io/tablesorter/docs/ -->
@@ -16,7 +17,7 @@
 
     <!-- jquery wklejamy w kodzie tylko 1 raz
       dla tablesorter jquery musi byc wklejony/zadeklarowany powyzej -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!--     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 
     <!-- tablesorter -->
     <link rel="stylesheet" href="css/theme.default.css">
@@ -236,6 +237,12 @@
                   <option value="6">nazwa od Z</option>
                 </select>
               </div>
+
+              <div class="form-group">
+                <div class="col">
+                    <button type="button" id="PobierzJSON" class="btn btn-outline-primary" onclick="pobierzJSON()">Pobierz JSON</button>
+                </div>
+              </div>
             </div>
 
             <div class="alert alert-success" id="myAlert" role="alert" style="display:none;" >Wiersz został usunięty.
@@ -255,15 +262,15 @@
             <table id="myTable" class="tablesorter">
               <thead>
                 <tr>
-                  <th hidden id="IdTowaru">IdTowaru</th>
+                  <th id="IdTowaru">IdTowaru</th>
                   <th>Nazwa towaru</th>
                   <th class="sorter-false">Kod</th>
                   <th class="sorter-false">Cena netto</th>
                   <th class="sorter-false">Stawka VAT</th>
                   <th>Cena brutto</th>
-                  <th class="sorter-false">Kategoria towarowa</th>
+                  <th class="sorter-false">Kategoria</th>
                   <th class="sorter-false">Opcje</th>
-                  <th>Ocena</th> 
+                  <th class="sorter-false">Ocena</th> 
                   <th class="sorter-false">Zdjecie</th>
                   <th class="sorter-false">Edytuj</th>
                   <th class="sorter-false">Usuń</th>
@@ -276,7 +283,7 @@
               <tbody>
                 <!-- Tu dodają się nowe wiersze z funkcji addRowToTable() -->
                  <tr>
-                  <td hidden>0</td>
+                  <td >0</td>
                   <td>ABC</td>
                   <td>AX-01</td>
                   <td>0.99</td>
@@ -294,7 +301,7 @@
                   <td hidden>5</td>
                 </tr>
                 <tr>
-                  <td hidden>1</td>
+                  <td >1</td>
                   <td>ZXY</td>
                   <td>YX-09</td>
                   <td>99.99</td>
@@ -313,8 +320,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
-          <!-- END TABELA TABLESSORTER-->
+          </div> <!-- END TABELA TABLESSORTER-->
 
         
         </div> <!-- koniec panel srodek -->
@@ -324,7 +330,7 @@
 
           <!--  WIZYTÓWKA - card -->
           <div class="card my-3" >
-            <img src="baklazan.png" class="card-img-top p-3">
+            <img src="img/baklazan.png" class="card-img-top p-3">
             <div class="card-body">
               <h5 class="card-title">Olga Biernacka</h5>
               <h6 class="card-subtitle mb-2 text-muted">Grupa 42B</h6>
