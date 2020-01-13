@@ -6,7 +6,7 @@
             "cenaNetto"		: "2.99",
             "stawkaVAT"		: "12",
             "cenaBrutto"	: "3.35",
-           	"zdjecie"		: "img/skarpetka.jpg",
+           	"zdjecie"		: "img/skarpetka.png",
            	"kategoriaTowarowa_txt" : "dzieciece",
            	"opcjeTowaru_txt" : "XS S",
            	"ocenaTowaru_txt": "zła",

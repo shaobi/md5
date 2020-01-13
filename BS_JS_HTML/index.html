@@ -82,7 +82,7 @@
         </div> <!-- koniec panel lewy -->
 
         <!-- panel SRODEK -->
-        <div class="alert-secondary col-12 col-md-4 col-xl-8">
+        <div class="alert-secondary col-12 col-md-4 col-xl-8 p-3">
 
           <!-- 
           oninput - waliduję na każdą zmianę w inpucie
@@ -224,9 +224,9 @@
           </form>
           <!-- Koniec FORMULARZ -->
 
-          <div class="form-group row">
-              <label for="selectSortowanieTabeli" class="col-sm-2 col-form-label" >Sortowanie tabeli </label>
-              <div class="col-sm-3">
+          <div class="form-group row">     
+            <div class="col">
+              <label for="selectSortowanieTabeli">Sortowanie tabeli </label>
                 <select id="selectSortowanieTabeli" class="form-control" onchange="sortowanieTabeli()">
                   <option value="0" >-- wybierz --</option>
                   <option value="1">cena od najniższej</option>
@@ -237,13 +237,32 @@
                   <option value="6">nazwa od Z</option>
                 </select>
               </div>
-
-              <div class="form-group">
-                <div class="col">
-                    <button type="button" id="PobierzJSON" class="btn btn-outline-primary" onclick="pobierzJSON()">Pobierz JSON</button>
+              
+              <div class="col">
+                <div class="text-center">
+                  <button type="button" id="PobierzJSON" class="btn btn-outline-primary" onclick="pobierzJSON()">Pobierz JSON</button>
                 </div>
               </div>
-            </div>
+
+              <!-- <div class="col">
+                <label for="WidokTabeli">Widok tabeli</label>
+                  <select id="selectWidokTabeli" class="form-control" onchange="WidokTabeli()">
+                    <option value="0" >-- wybierz --</option>
+                    <option value="1">lista</option>
+                    <option value="2">obrazki</option>
+                  </select>
+              </div> -->
+              <div class="col">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="swt1" name="rbWidokTabeli" class="custom-control-input" value="1" checked onclick="WidokTabeli()"><label class="custom-control-label" for="swt1">lista</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="swt2" name="rbWidokTabeli" class="custom-control-input" value="2" onclick="WidokTabeli()"><label class="custom-control-label" for="swt2">obrazki</label>
+                </div>
+              </div>
+
+          </div>
+
 
             <div class="alert alert-success" id="myAlert" role="alert" style="display:none;" >Wiersz został usunięty.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -288,7 +307,7 @@
                   <td>AX-01</td>
                   <td>0.99</td>
                   <td>23</td>
-                  <td>1.00</td>
+                  <td>1.99</td>
                   <td>damskie</td>
                   <td>XS S</td>
                   <td>rewelacyjna</td>
@@ -304,9 +323,9 @@
                   <td >1</td>
                   <td>ZXY</td>
                   <td>YX-09</td>
-                  <td>99.99</td>
-                  <td>22</td>
                   <td>99.00</td>
+                  <td>22</td>
+                  <td>99.99</td>
                   <td>męskie</td>
                   <td>L XL</td>
                   <td>zła</td>
@@ -322,7 +341,11 @@
             </table>
           </div> <!-- END TABELA TABLESSORTER-->
 
-        
+        <div id="WidokTabeliObrazki" style="display:none;" class="row">
+          <!-- obrazki z funkcji WidokTabeliObrazki() -->
+        </div>
+
+
         </div> <!-- koniec panel srodek -->
         
         <!-- panel PRAWY -->
@@ -394,27 +417,6 @@
               </select>
             </div>
           </div>
-
-<!--           <fieldset class="form-group">
-              <div class="row ml-1">
-                <legend class="col-form-label col-sm-2">Opcje dostawy</legend>
-                <div class="col-sm-8">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rbDostawa" id="rbDostawa1" value="9.90" checked>
-                    <label class="form-check-label" for="rbDostawa1">poczta - 9.90</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rbDostawa" id="rbDostawa2" value="19.99">
-                    <label class="form-check-label" for="rbDostawa2">kurier - 19.99</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rbDostawa" id="rbDostawa3" value="0"> 
-                    <label class="form-check-label" for="rbDostawa3">odbiór osobisty - 0.00</label>
-                  </div>
-                </div>
-              </div>
-            </fieldset> -->
-
 
           <hr>
           <div class="row">

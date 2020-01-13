@@ -112,7 +112,7 @@ function obliczCenaBrutto(){
 	var cenaBrutto = document.getElementById("inputCenaBrutto");
 
 	if (!isNaN(stawkaVAT) && !isNaN(cenaNetto)) {
-		cenaBrutto.value = cenaNetto + (cenaNetto * stawkaVAT/100);
+		cenaBrutto.value = (cenaNetto + (cenaNetto * stawkaVAT/100)).toFixed(2);
 		cenaBrutto.innerHTML = cenaBrutto.value;
 	}
 	else {
@@ -260,7 +260,7 @@ function usunWiersz(){
         $("#myAlert").hide(); // ukrywa element na stronie
     }, 2000);
 
-    IdTowaruCounter -= 1;
+    //IdTowaruCounter -= 1;
 
 	// czysci całą tabliceę
 	//$('.tablesorter tbody tr').remove();
@@ -456,14 +456,10 @@ function pobierzJSON(){
 	
 	$.getJSON("./products.json", function(data) {
 		
-		//console.log(data);
-		
-		var t = $('#myTable');
-		var row;
 		for (var i = 0; i < data.length; i++) {
 
 			IdTowaruCounter ++;
-			row = '<tr><td >'  + IdTowaruCounter
+			var row = '<tr><td >'  + IdTowaruCounter
 				+ '</td><td>' + data[i].nazwaTowaru 
 				+ '</td><td>' + data[i].kodTowaru 
 				+ '</td><td>' + data[i].cenaNetto 
@@ -488,10 +484,108 @@ function pobierzJSON(){
 			    .trigger('addRows', [$row, resort])
 			    .trigger('update');
 			}
-
-
 	});
 }
+
+function WidokTabeli() {
+
+	// var wybor = document.getElementById("selectWidokTabeli").value;
+	// switch (wybor) {
+	// 	case '1': // lista
+	// 		$('#WidokTabeliObrazki').hide();
+	// 		$('#myTable').show();
+	// 		zmianaWidok = true;
+	// 		break;
+	// 	case '2': // obrazki
+	// 		$('#myTable').hide();
+	// 		$('#WidokTabeliObrazki').show();
+	// 		WidokTabeliObrazki();
+	// 		zmianaWidok = false;
+	// 		break;	
+	// 	}
+
+	var wybor = document.querySelector('input[name="rbWidokTabeli"]:checked').value;
+
+	switch (wybor) {
+		case '1': // lista
+			$('#WidokTabeliObrazki').hide();
+			$('#myTable').show();
+			let element = document.getElementById("WidokTabeliObrazki");
+			while (element.firstChild) {
+			  element.removeChild(element.firstChild);
+			}
+			break;
+		case '2': // obrazki
+			$('#myTable').hide();
+			$('#WidokTabeliObrazki').show();
+			WidokTabeliObrazki();
+			break;	
+		}
+}
+
+function WidokTabeliObrazki(){
+	
+	class Produkty {
+	  	constructor(ref) {
+		    this.list = [];
+		    this.hmi_ref = ref;
+
+		    // Bootstap : container type Cards
+			this.BS = {}
+		    this.BS.container = document.createElement('div');
+		    this.BS.card      = document.createElement('div');
+		    this.BS.image     = document.createElement('img');
+		    this.BS.info      = document.createElement('div');
+		    this.BS.title     = document.createElement('h5');
+		    this.BS.text      = document.createElement('h6');
+
+		    this.BS.info.appendChild( this.BS.title )
+		    this.BS.info.appendChild( this.BS.text )
+		    this.BS.card.appendChild( this.BS.image );
+		    this.BS.card.appendChild( this.BS.info );
+		    this.BS.container.appendChild( this.BS.card );
+
+		    this.BS.container.className = 'col-3 mt-3';
+		    this.BS.card.className      = 'card';
+		    this.BS.image.className     = 'card-img-top';
+		    this.BS.title.className     = 'card-title ml-3';
+		    this.BS.text.className      = 'card-text ml-3';
+
+		    this.BS.image.style      = 'width: 250px';
+		    this.BS.image.style      = 'height: 250px';
+		}
+
+		add (nazwa, netto, brutto, image)
+		{			
+			this.list.push( {nazwa, netto, brutto, image} )
+
+			this.BS.image.src         = image;
+			this.BS.title.textContent = nazwa;
+			this.BS.text.innerHTML 	  = `cena ${netto} (${brutto})`;
+
+			let newNode = this.BS.container.cloneNode(true)
+			this.hmi_ref.appendChild( newNode );
+		}
+	}
+	
+	const ProductsSpace = document.getElementById('WidokTabeliObrazki');
+	let produkt = new Produkty(ProductsSpace);
+
+	var table = document.getElementById('myTable');
+	var regex = /^img\/./ ;
+	var zdjecieDef = ""; 
+
+    for (var i = 1, row; row = table.rows[i]; i++) {
+		if ( !regex.test(row.cells[9].innerHTML) )
+			zdjecieDef = "img/produkt.png";
+		else
+			zdjecieDef = row.cells[9].innerHTML;
+
+		produkt.add( row.cells[1].innerHTML, row.cells[3].innerHTML, row.cells[5].innerHTML, zdjecieDef);	
+	}		   
+}
+
+
 
 
 
