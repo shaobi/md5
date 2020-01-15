@@ -31,7 +31,18 @@ function checkNazwaTowaru() {
 	var poleError = document.getElementById("inputNazwaTowaruError");
 	var regex = /^[a-zA-Z\s]+$/;
 
-	if( regex.test(pole.value) && pole.value.length >1 && pole.value.length <= 10) {
+	var productsNode = document.querySelectorAll('.NazwaTowaru');
+	var productsName = [];
+
+	productsNode.forEach(product => productsName.push(product.innerText));
+	console.log(productsName);
+
+	var isFound = productsName.filter(productName => productName === pole.value.trim()).length;
+	console.log(pole.value);
+	// if (isFound)
+	// 	console.log("ZNALAZLEM w tabeli produkt o tej samej nazwie!");
+
+	if( regex.test(pole.value) && pole.value.length >1 && pole.value.length <= 10 && !isFound) {
 		poleOK(pole, poleError, "Nazwa Towaru super :) ");
 	}
 	else {
@@ -209,7 +220,7 @@ function addRowToTable() {
 	//console.log("IdTowaruCounter: "+ IdTowaruCounter);
 
 	var row = '<tr><td >'  + IdTowaruCounter
-			+ '</td><td>' + nazwaTowaru 
+			+ '</td><td class="NazwaTowaru">' + nazwaTowaru 
 			+ '</td><td>' + kodTowaru 
 			+ '</td><td>' + cenaNetto 
 			+ '</td><td>' + stawkaVAT
@@ -460,7 +471,7 @@ function pobierzJSON(){
 
 			IdTowaruCounter ++;
 			var row = '<tr><td >'  + IdTowaruCounter
-				+ '</td><td>' + data[i].nazwaTowaru 
+				+ '</td><td class="NazwaTowaru">' + data[i].nazwaTowaru 
 				+ '</td><td>' + data[i].kodTowaru 
 				+ '</td><td>' + data[i].cenaNetto 
 				+ '</td><td>' + data[i].stawkaVAT

@@ -110,7 +110,7 @@
             <div class="form-group row">
               <label for="input" class="col-sm-2 col-form-label">Cena netto</label>
               <div class="col-sm-10">
-                <input type="numer" class="form-control" id="inputCenaNetto" placeholder="Cena netto" onchange="cenaNettoZera()" oninput="checkCenaNetto()">
+                <input type="number" class="form-control" id="inputCenaNetto" placeholder="Cena netto" onchange="cenaNettoZera()" oninput="checkCenaNetto()">
                 <div id="inputCenaNettoError"></div>
               </div>
             </div>
@@ -118,7 +118,7 @@
             <div class="form-group row">
               <label for="input" class="col-sm-2 col-form-label">Stawka VAT</label>
               <div class="col-sm-10">
-                <input type="numer" class="form-control" id="inputStawkaVAT" placeholder="Stawka VAT" oninput="checkStawkaVAT()">
+                <input type="number" class="form-control" id="inputStawkaVAT" placeholder="Stawka VAT" oninput="checkStawkaVAT()">
                 <div id="inputStawkaVATError"></div>
               </div>
             </div>
@@ -126,7 +126,7 @@
             <div class="form-group row">
               <label for="input" class="col-sm-2 col-form-label">Cena brutto</label>
               <div class="col-sm-10">
-                <input type="numer" class="form-control" id="inputCenaBrutto" value="0" readonly>
+                <input type="number" class="form-control" id="inputCenaBrutto" value="0" readonly>
               </div>
             </div>
 
@@ -282,7 +282,7 @@
               <thead>
                 <tr>
                   <th id="IdTowaru">IdTowaru</th>
-                  <th>Nazwa towaru</th>
+                  <th class="NazwaTowaru">Nazwa towaru</th>
                   <th class="sorter-false">Kod</th>
                   <th class="sorter-false">Cena netto</th>
                   <th class="sorter-false">Stawka VAT</th>
@@ -303,7 +303,7 @@
                 <!-- Tu dodają się nowe wiersze z funkcji addRowToTable() -->
                  <tr>
                   <td >0</td>
-                  <td>ABC</td>
+                  <td class="NazwaTowaru">ABC</td>
                   <td>AX-01</td>
                   <td>0.99</td>
                   <td>23</td>
@@ -321,7 +321,7 @@
                 </tr>
                 <tr>
                   <td >1</td>
-                  <td>ZXY</td>
+                  <td class="NazwaTowaru">ZXY</td>
                   <td>YX-09</td>
                   <td>99.00</td>
                   <td>22</td>
@@ -357,7 +357,7 @@
             <div class="card-body">
               <h5 class="card-title">Olga Biernacka</h5>
               <h6 class="card-subtitle mb-2 text-muted">Grupa 42B</h6>
-              <p class="card-text">numer indeksu 39988</p>
+              <p class="card-text">number indeksu 39988</p>
               <!-- <a href="#" class="card-link">Card link</a> -->
             </div>
           </div>  <!-- koniec WIZYTÓWKI -->
