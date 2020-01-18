@@ -155,6 +155,7 @@ function checkOpcjeTowaru() {
 	
 	var checboxOpcjeTowaru = document.querySelectorAll('input[name="cbOpcjeTowaru"]:checked').length;
 	
+	$('#checkboxListOpcjeTowaruError').show();
 	if (checboxOpcjeTowaru >= 2) {
 		poleOK(pole, poleError, "Opcje Towatu super :) ");
 	}
@@ -164,14 +165,14 @@ function checkOpcjeTowaru() {
 }
 
 function czyWszystkoOK(){
-	
+
 	checkNazwaTowaru();
-	checkKodTowaru();
 	checkCenaNetto();
 	checkStawkaVAT();
 	checkKategoriaTowarowa();
 	checkOpcjeTowaru();
-	
+	checkKodTowaru();
+
 	//console.log("Wszystko ok: " + wszystkoOK) ;
 	if(!wszystkoOK) {
 		alert("Uzupełnij puste lub źle wypełnione pola!");
@@ -254,7 +255,7 @@ function addRowToTable() {
 	document.getElementById("inputStawkaVAT").classList.remove('is-invalid', 'is-valid', 'invalid-feedback','valid-feedback');
 	document.getElementById("inputCenaBrutto").classList.remove('is-invalid', 'is-valid', 'invalid-feedback','valid-feedback');
 	document.getElementById("selectKategoriaTowarowa").classList.remove('is-invalid', 'is-valid', 'invalid-feedback','valid-feedback');
-	document.getElementById("checkboxListOpcjeTowaru").classList.remove('is-invalid', 'is-valid', 'invalid-feedback','valid-feedback');
+	$('#checkboxListOpcjeTowaruError').hide();
 }
 
 function usunWiersz(){
