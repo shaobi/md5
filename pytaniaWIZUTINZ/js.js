@@ -1,7 +1,3 @@
-var wylosowaneJuzPytania =  new Array();
-
-function losujPytanie() {
-
 // Pytania i odpowiedzi //
 
 var tab = [ 
@@ -1227,30 +1223,76 @@ Zastosowania:
 - k. det. jako sumy kontrolne do transmisji internetowej i komunikacji radiowej
 - k. det. jako CRC wykrycie uszkodzenia ramek/pakietów w standarcie USB
 - k. korekcyjne w macierzach dyskowych RAID do korekcji błędów
-`] 
+`] ];
 
-];
+var wylosowaneJuzPytania =  new Array();
+var nrPytaniaPoczatek = 0;
+var nrPytaniaKoniec = 115;
 
-	
-	// ---- //
+function losujPytanie() {
+
+	var radioOption = document.querySelector('input[name="rr"]:checked').value; // zwraca zaznaczone ID (value) radio-przycisku
+
+	switch (radioOption) {
+		case 'losowo':
+			losowo();
+			break;
+		case 'poczatek':
+			pp(nrPytaniaPoczatek, 'poczatek');
+			break;
+		case 'koniec':
+			pp(nrPytaniaKoniec, 'koniec');
+			break;
+	}
+}
+
+function CzyWszystkiePytania(){
+
 	$(".collapse").removeClass("show");
 
-	if (wylosowaneJuzPytania.length == tab.length){ // 116
+	if (wylosowaneJuzPytania.length == tab.length){
 		alert("Wszystkie 116 pytań zrobione :)");
 		wylosowaneJuzPytania.length = 0;
-	}
-	
+	}	
+}
+
+function stopka() {
+	document.getElementById("Stopka").innerHTML = wylosowaneJuzPytania.length + " / " + tab.length;
+}
+
+function losowo() {
+
+	CzyWszystkiePytania();
+
 	var nrPytania = Math.floor(Math.random() * tab.length);
 
 	while (wylosowaneJuzPytania.includes(nrPytania)) {
 		nrPytania = Math.floor(Math.random() * tab.length);
 	}
 
-	wylosowaneJuzPytania.push(nrPytania);
-	document.getElementById("TrescPytania").innerHTML		= tab[nrPytania][0];
-	document.getElementById("TrescOdpowiedzi").innerHTML 	= tab[nrPytania][1].replace(new RegExp('\n','g'), '<br />');
-	//console.log(tab);
-	//console.log(wylosowaneJuzPytania);
-
-	document.getElementById("Stopka").innerHTML = wylosowaneJuzPytania.length + " / " + tab.length;
+	pp(nrPytania, 'losowo');
 }
+
+
+function pp(nrP, rodzaj) {
+
+	CzyWszystkiePytania();	
+	wylosowaneJuzPytania.push(nrP);
+	document.getElementById("TrescPytania").innerHTML		= tab[nrP][0];
+	document.getElementById("TrescOdpowiedzi").innerHTML 	= tab[nrP][1].replace(new RegExp('\n','g'), '<br />');
+	
+	switch (rodzaj) {
+		case 'losowo':
+			break;
+		case 'poczatek':
+			wylosowaneJuzPytania.length = 0;
+			nrPytaniaPoczatek ++;
+			break;
+		case 'koniec':
+			wylosowaneJuzPytania.length = 0;
+			nrPytaniaKoniec --;
+			break;
+	}
+	stopka();
+}
+
